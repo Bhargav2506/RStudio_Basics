@@ -1,0 +1,560 @@
+---
+title: "EDA_LA1"
+author: "Bhargav"
+date: "14 May 2023"
+output: pdf_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+```{r}
+##Load Dataset
+df <- read.csv("C:/Users/Bhargav's/Downloads/archive (1)/WorldCupMatches.csv");
+df
+```
+
+```{r}
+##Dimension of dataset
+dim(df)
+```
+
+```{r}
+##number of rows
+nrow(df)
+```
+
+```{r}
+##number of columns
+ncol(df)
+```
+
+```{r}
+## Names of the columns
+names(df)
+```
+
+```{r}
+## Display a columns in dataset
+df$Year
+```
+
+```{r}
+##Display The 2nd Column of DataSet
+df$Datetime
+```
+
+```{r}
+#Sorting of the column Year
+sort(df$Year)
+```
+
+```{r}
+##This is the overall summary of the dataset
+summary(df$Year)
+```
+
+```{r}
+#Minimum of the dataset because the dataset contain null value it is showing this
+min(df$Year)
+```
+
+```{r}
+#Maximum of the dataset because the dataset contain null value it is showing this
+max(df$Year)
+```
+
+```{r}
+#This is the minimum year of dataset
+print(min(df$Year, na.rm = TRUE))
+```
+
+```{r}
+#this the maximum of the dataset
+print(max(df$Year, na.rm = TRUE))
+```
+
+```{r}
+#Thisgives the first 6 eements
+head(df)
+```
+
+```{r}
+#this showss the mean of the requires column
+mean(df$Year,na.rm = TRUE)
+```
+
+```{r}
+#This gives the median of the required required column
+median(df$Year,na.rm = TRUE)
+```
+
+```{r}
+#This gives the mode of the required required column
+mode(df$Year)
+```
+
+```{r}
+#This gives the mode of the required required column
+mode <- as.numeric(names(year_counts)[which.max(year_counts)])
+mode
+```
+```{r}
+#FInding the Quantitle of 50,70 and 90%
+res <- quantile(df$Year,c(0.5,0.7,0.9),na.rm = TRUE)
+res
+```
+
+```{r}
+#Documentation of Mean
+help(mean)
+```
+
+```{r}
+#lOADING OF THE LIBRARY
+library(dplyr)
+```
+
+```{r}
+#DETERMINIG THE CLASS OF THE COLUMN YEAR
+class(df$Year)
+```
+
+```{r}
+#CLASS OF DATASET
+class(df)
+```
+
+```{r}
+#SHOWS THE HISTORY
+history()
+```
+
+```{r}
+#DETERMIN THE LENGTH OF THE DATASET
+length(df)
+```
+
+```{r}
+#IS USE TO CHECK IF IT IS NUMERIC
+is.numeric(df)
+```
+
+```{r}
+is.numeric(df$Year)
+```
+
+```{r}
+#STANDARD DEVIATION OF THE DATASET
+sd(df$Year,na.rm=TRUE)
+```
+
+```{r}
+#SAMPLE OF THE DATASET
+sample(df)
+```
+
+
+```{r}
+#DISPLAYS THE NEW YEAR AND DATETIME
+colnames(df)[1] <- "New_Year"
+df
+```
+
+```{r}
+#DISPLAYS THE NUMBER OF COLUMN
+ncol(df)
+```
+
+```{r}
+#DISPLAYS THE DATETIME AND NEW_YEAR COLUMN
+data_frame <- df[, c("Datetime","New_Year")]
+data_frame
+```
+
+```{r}
+df$Score <- c(1,2,3)
+df
+```
+
+```{r}
+#DISPLAYS THE COLUMN EXLCUDING SCORE
+df <- subset(df, select = -Score)
+df
+```
+
+
+```{r}
+#DISPLAYS THE STAGE WHOSE ROUNDID IS 308
+subset_df <- subset(df, df["RoundID"]==308)
+subset_df
+```
+
+
+```{r}
+factor_levels <- levels(df$RoundID)
+factor_levels
+```
+
+```{r}
+fact = c(1,2,3,4,5)
+```
+
+```{r}
+levels(fact)
+```
+
+```{r}
+class(fact)
+```
+
+```{r}
+fact = as.factor(fact)
+```
+
+```{r}
+class(fact)
+```
+
+```{r}
+levels(fact)
+```
+
+```{r}
+class(df['RoundID'])
+```
+
+```{r}
+df['RoundID'] = as.factor(df$RoundID)
+df
+```
+
+```{r}
+class(df['RoundID'])
+```
+
+```{r}
+levels(df['RoundID'])
+```
+
+```{r}
+library('dplyr')
+```
+
+```{r}
+head(df)
+```
+
+
+```{r}
+head(1)
+```
+
+```{r}
+col(df)
+```
+
+```{r}
+filtered_df <- df[df$Home.Team.Goals > 2, ]
+filtered_df
+```
+
+```{r}
+sorted_df <- arrange(df, Stadium)
+```
+
+```{r}
+df <- mutate(df, Total.Goals = Home.Team.Goals + Away.Team.Goals)
+df
+```
+
+```{r}
+sorted_df <- arrange(df, Stadium)
+sorted_df
+```
+
+```{r}
+filtered_df <- df[df$Home.Team.Goals > 2, ]
+filtered_df
+```
+
+```{r}
+df <- mutate(df, Total.Goals = Home.Team.Goals + Away.Team.Goals)
+df
+```
+
+```{r}
+selected_df <- select(df, New_Year, Stage, Attendance)
+selected_df
+```
+
+```{r}
+summary_df <- df %>% group_by(Stage) %>% summarize(Average.Goals = mean(Home.Team.Goals))
+summary_df
+```
+
+```{r}
+count_df <- count(df, Home.Team.Name)
+count_df
+```
+
+```{r}
+subset_df <- df[df$Stage == "Group 1" & df$New_Year >= 2000, ]
+subset_df
+```
+
+```{r}
+clean_df <- na.omit(df)
+clean_df
+```
+
+```{r}
+renamed_df <- rename(df, Away.Team = Away.Team.Name)
+renamed_df
+```
+
+```{r}
+summary_stats <- summary(df[, c("Home.Team.Goals", "Away.Team.Goals")])
+summary_stats
+```
+
+```{r}
+distinct_count <- n_distinct(df$Stadium)
+distinct_count
+```
+
+```{r}
+total_goals <- sum(df$Home.Team.Goals) + sum(df$Away.Team.Goals)
+total_goals
+```
+
+```{r}
+filtered_df <- df[df$Stage == "Group 1" & df$Attendance > 20000, ]
+filtered_df
+```
+
+```{r}
+average_attendance <- df %>% group_by(New_Year) %>% summarize(Average_Attendance = mean(Attendance))
+average_attendance
+```
+
+```{r}
+deduplicated_df <- distinct(data_frame)
+deduplicated_df
+```
+
+```{r}
+matches_per_stadium <- table(df$Stadium)
+matches_per_stadium
+```
+
+```{r}
+
+max_attendance <- max(df$Attendance, na.rm = TRUE)
+max_attendance
+```
+
+```{r}
+subset_df <- subset(df, Home.Team.Goals > Away.Team.Goals)
+subset_df
+```
+
+```{r}
+subset_df <- subset(df, Home.Team.Goals > Away.Team.Goals)
+subset_df
+```
+
+```{r}
+correlation <- cor(df$Home.Team.Goals, df$Attendance, use = "complete.obs")
+correlation
+```
+
+```{r}
+filtered_df <- df[df$Stage == "Final", ]
+filtered_df
+```
+
+```{r}
+mean_goals <- mean(df$Home.Team.Goals)
+mean_goals
+```
+
+```{r}
+median_goals <- median(data_frame$Home.Team.Goals)
+median_goals
+```
+
+```{r}
+median_goals <- median(data_frame$Home.Team.Goals,na.rm = TRUE)
+median_goals
+```
+
+```{r}
+library(gcookbook)
+```
+
+```{r}
+head(df)
+```
+
+```{r}
+ggplot(faithful,aes(x = df$Home.Team.Goals))+geom_density()
+```
+
+```{r}
+library("ggplot2")
+```
+
+```{r}
+ggplot(faithful,aes(x = df$Home.Team.Goals))+geom_density()
+```
+
+
+
+```{r}
+ggplot(faithful,aes(x = df$Home.Team.Goals))+geom_density()
+```
+
+```{r}
+class(df$New_Year)
+```
+
+
+```{r}
+ggplot(df, aes(x = Stage)) +geom_bar() +xlab("Stage") +ylab("Number of Matches") +ggtitle("Bar Plot: Number of Matches by Stage")
+```
+
+```{r}
+ggplot(df, aes(x = Stage)) +geom_bar() +xlab("Stage") +ylab("Number of Matches") +ggtitle("Bar Plot: Number of Matches by Stage")
+```
+
+```{r}
+ggplot(df, aes(x = New_Year, y = Total.Goals, group = 1)) +geom_line() +xlab("Year") +ylab("Total Goals") +ggtitle("Line Plot: Total Goals Over the Years")
+```
+
+```{r}
+ggplot(df, aes(x = Stage, fill = factor(Home.Team.Name))) +geom_bar(position = "stack") +xlab("Stage") +ylab("Number of Goals") +ggtitle("Stacked Bar Plot: Goals by Home Team in Each Stage")
+```
+
+```{r}
+ggplot(data_frame, aes(x = Home.Team.Goals, y = Away.Team.Goals)) +
+  geom_point() +
+  xlab("Home Team Goals") +
+  ylab("Away Team Goals") +
+  ggtitle("Scatter Plot: Home Team Goals vs. Away Team Goals")
+
+```
+
+```{r}
+ggplot(df,aes(x=New_Year)) + geom_density(fill = 'blue',alpha = 0.2,colour = NA) + xlim(35,105) + geom_line(stat = "density")
+```
+
+```{r}
+ggplot(df,aes(x=New_Year)) + geom_density(fill = "blue",alpha = 0.2,colour = NA) + xlim(35,105) + geom_line(stat = "density")
+```
+
+```{r}
+ggplot(faithful,aes(x=New_Year)) + geom_density(fill = "blue",alpha = 0.2,colour = NA) + xlim(35,105) + geom_line(stat = "density")
+```
+
+```{r}
+# Create a density plot of 'Home.Team.Goals' with a filled blue color, transparency of 0.2, and no outline
+ggplot(df,aes(x=Home.Team.Goals)) + geom_density(fill = "blue",alpha = 0.2,colour = NA) + xlim(35,105) + geom_line(stat = "density")
+```
+
+```{r}
+# Create a scatter plot of 'Home.Team.Goals' versus 'Away.Team.Goals'
+ggplot(df, aes(x = Home.Team.Goals, y = Away.Team.Goals)) + 
+  geom_point()
+
+```
+
+```{r}
+# Create a histogram of 'Home.Team.Goals' with bars filled based on the 'Stage' column
+ggplot(df, aes(x = Home.Team.Goals, fill = Stage)) +
+  geom_histogram()
+
+```
+
+```{r}
+# Create a histogram of 'Home.Team.Goals' with a customized title, x-axis label, and y-axis label
+ggplot(df, aes(x = Home.Team.Goals)) +
+  geom_histogram() +
+  labs(title = "Distribution of Home Team Goals",
+       x = "Number of Goals",
+       y = "Frequency")
+
+```
+
+```{r}
+# Create a histogram of 'Home.Team.Goals' with custom x-axis breaks
+
+ggplot(df, aes(x = Home.Team.Goals)) +
+  geom_histogram() +
+  scale_x_continuous(breaks = seq(0, 10, 2))  # Setting custom x-axis breaks
+
+```
+
+```{r}
+# Apply a black and white theme to the plot
+theme_bw()  # Applying a black and white theme
+```
+
+```{r}
+# Create a density plot of 'Total.Goals'
+ggplot(df,aes(x = Total.Goals)) + geom_density()
+```
+
+```{r}
+# Create a density plot of 'Total.Goals' with a blue color
+ggplot(df,aes(x = Total.Goals)) + geom_density(colour = 'blue')
+```
+
+```{r}
+# Create a density plot of 'Half.time.Home.Goals' with a blue color
+ggplot(df,aes(x = Half.time.Home.Goals)) + geom_density(colour = 'blue')
+```
+
+```{r}
+# Create a density plot of 'Half.time.Home.Goals' with a blue color and overlay a histogram
+ggplot(df,aes(x = Half.time.Home.Goals)) + geom_density(colour = 'blue')+geom_histogram()
+```
+
+```{r}
+# Create a boxplot of 'Total.Goals'
+ggplot(df,aes(x = Total.Goals))+geom_boxplot()
+```
+
+```{r}
+# Display the structure of the 'df' data frame
+str(df)
+```
+
+```{r}
+# Create a boxplot of 'Total.Goals'
+ggplot(df,aes(x = Total.Goals))+geom_boxplot()
+```
+
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
